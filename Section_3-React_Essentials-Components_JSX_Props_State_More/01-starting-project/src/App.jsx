@@ -1,4 +1,5 @@
 import reactImg from './assets/react-core-concepts.png';
+import { CORE_CONCEPTS } from './data.js';
 const words = ['Fundamental', 'Crucial', 'Core'];
 
 function getRandomInt(max) {
@@ -20,11 +21,33 @@ function Header() {
   );
 }
 
+function CoreConcept({ image, title, description }) {
+
+  return (
+    <li>
+      <img src={image} alt={title} />
+      <h3>{title}</h3>
+      <p>{description}</p>
+    </li>
+  );
+}
+
 function App() {
   return (
     <div>
       <Header />
       <main>
+        <section id='core-concepts'>
+          <ul>
+            {
+              CORE_CONCEPTS.map(element => {
+                console.log("ELEMENT", element);
+                return (<CoreConcept {...element} />);
+              })
+            }
+
+          </ul>
+        </section>
         <h2>Time to get started!</h2>
       </main>
     </div>
