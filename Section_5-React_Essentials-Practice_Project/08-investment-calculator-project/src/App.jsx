@@ -23,13 +23,22 @@ function App() {
       )
     );
   }
-  useEffect(() => {
-    console.log('Updated inputValues:', inputValues);
-  }, [inputValues]);
+
+  // The teacher user initialValues as an Object and user this function for change a value
+  // initial values should be like current investmentParams
+  //-------------------------------------------
+  // function handleChange(inputId, newValue) {
+  //   setInputValues((prevUserInputValues) => {
+  //     return {
+  //       ...prevUserInputValues,
+  //       [inputID]: +newValue,
+  //     }
+  //   });
+  // }
+
   function handleChange(event) {
     const { id, value } = event.target;
     onInputChange(id, parseFloat(value));
-    console.log('Updated inputValues:', inputValues);
   }
 
   const investmentParams = {
@@ -49,7 +58,8 @@ function App() {
     <>
       <Header />
       <UserInput values={inputValues} onInputChange={handleChange} />
-      <Result data={investmentResults} />
+      {investmentParams.duration <= 0 && <p className='center'>Please enter a duration higher than 0</p>}
+      {investmentParams.duration > 0 && <Result data={investmentResults} initialInvetment={investmentParams.initialInvestment} />}
     </>
   );
 }
